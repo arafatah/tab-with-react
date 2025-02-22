@@ -26,7 +26,7 @@ export default function App() {
   );
 }
 
-console.log(<DifferentContent test={33} />);
+// console.log(<DifferentContent test={33} />);
 
 function Tabbed({ content }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -68,14 +68,14 @@ function TabContent({ item }) {
   const [showDetails, setShowDetails] = useState(true);
   const [likes, setLikes] = useState(0);
 
-  function handleInc() {
-    setLikes(likes + 1);
-  }
-
   function handleUndo() {
     setShowDetails(true);
     setLikes(0);
-    console.log(likes);
+    // console.log(likes);
+  }
+
+  function handleInc() {
+    setLikes((likes) => likes + 1);
   }
 
   function handleTripleInc() {
@@ -86,9 +86,16 @@ function TabContent({ item }) {
     setLikes((likes) => likes + 1);
     setLikes((likes) => likes + 1);
     setLikes((likes) => likes + 1);
+
+    // handleInc()
+    // handleInc()
+    // handleInc()
   }
 
-  console.log("render");
+  function handleUndoLater() {
+    setTimeout(handleUndo, 2000);
+  }
+// console.log("Render")
   return (
     <div className="tab-content">
       <h4>{item.summary}</h4>
@@ -108,7 +115,7 @@ function TabContent({ item }) {
 
       <div className="tab-undo">
         <button onClick={handleUndo}>Undo</button>
-        <button>Undo in 2s</button>
+        <button onClick={handleUndoLater}>Undo in 2s</button>
       </div>
     </div>
   );
